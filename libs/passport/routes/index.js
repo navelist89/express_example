@@ -1,11 +1,12 @@
 var express = require('express');
 var passport = require('passport'); // passport를 가져와야되요
-var router = express.Router();
+var app = express();
 
 
-module.exports = function(router){           
+function route(){           
 // 페이지 렌더링입니다.
    
+var router = express.Router();
 router.get('/signin', function(req, res){ // link는 페이지를 분기치기위한 수단과 요청보낼 주소입니다.   
   res.render('sign', { title: '로그인', link : 'signin', message : req.flash('signinMessage')});
 });
@@ -33,5 +34,10 @@ router.post('/signup', passport.authenticate('local-signup', {
   failureFlash : true
 }));
 
+return router;
 }
       
+
+module.export = function(router){
+  router.use('/user', route())
+}
