@@ -38,6 +38,6 @@ return router;
 }
       
 
-module.export = function(router){
+module.exports = function(router){
   router.use('/user', route())
 }
